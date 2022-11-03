@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost:5000"
+url = "http://localhost:3500"
 
 def parse_response(response):
     if response.status_code >= 400:

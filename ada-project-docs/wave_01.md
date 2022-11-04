@@ -106,7 +106,7 @@ As a client, I want to be able to make a `GET` request to `/tasks` when there is
 ]
 ```
 
-### Get Tasks: No Saved Tasks
+### DONE Get Tasks: No Saved Tasks
 
 As a client, I want to be able to make a `GET` request to `/tasks` when there are zero saved tasks and get this response:
 
@@ -116,7 +116,7 @@ As a client, I want to be able to make a `GET` request to `/tasks` when there ar
 []
 ```
 
-### Get One Task: One Saved Task
+### TODO Get One Task: One Saved Task
 
 As a client, I want to be able to make a `GET` request to `/tasks/1` when there is at least one saved task and get this response:
 
@@ -133,7 +133,7 @@ As a client, I want to be able to make a `GET` request to `/tasks/1` when there 
 }
 ```
 
-### Update Task
+### TODO Update Task
 
 As a client, I want to be able to make a `PUT` request to `/tasks/1` when there is at least one saved task with this request body:
 
@@ -161,7 +161,7 @@ and get this response:
 
 Note that the update endpoint does update the `completed_at` attribute. This will be updated with custom endpoints implemented in Wave 03.
 
-### Delete Task: Deleting a Task
+### TODO Delete Task: Deleting a Task
 
 As a client, I want to be able to make a `DELETE` request to `/tasks/1` when there is at least one saved task and get this response:
 
@@ -190,7 +190,7 @@ You may choose the response body.
 Make sure to complete the tests for non-existing tasks to check that the correct response body is returned.
  
 
-### Create a Task: Invalid Task With Missing Data
+### TODO Create a Task: Invalid Task With Missing Data
 
 #### Missing `title`
 

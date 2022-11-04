@@ -38,3 +38,8 @@ def handle_task_post():
     return_message["task"] = new_task.to_dict()
 
     return make_response(return_message, 201)
+
+# TODO Get One Task: One Saved Task
+# TODO Update Task
+# TODO Delete Task: Deleting a Task
+# TODO Create a Task: Invalid Task With Missing Data

@@ -9,19 +9,17 @@ class Task(db.Model):
 
     def to_dict(self):
         result_dict = dict(
-            is_complete = self.completed_at if self.completed_at else False,
-            title = self.title,
-            task_id = self.task_id,
-            description = self.description
-        
+            is_complete=self.completed_at if self.completed_at else False,
+            title=self.title,
+            task_id=self.task_id,
+            description=self.description,
         )
         return result_dict
 
     @classmethod
     def from_dict(cls, task_dict):
         return cls(
-            title = task_dict['title'],
-            completed_at = task_dict['completed_at'],
-            description = task_dict['description']
+            title=task_dict["title"],
+            completed_at=task_dict["completed_at"],
+            description=task_dict["description"],
         )
-

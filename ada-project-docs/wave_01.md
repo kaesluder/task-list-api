@@ -54,7 +54,7 @@ The following are required routes for wave 1. Feel free to implement the routes 
 
 In addition to testing your code with pytest and postman, you can play test your code with the CLI (Command Line Interface) by running `python3 cli/main.py`. The flask server needs to be running to run the CLI.
 
-### Create a Task: Valid Task With `null` `completed_at`
+### [x] Create a Task: Valid Task With `null` `completed_at`
 
 As a client, I want to be able to make a `POST` request to `/tasks` with the following HTTP request body
 
@@ -83,7 +83,7 @@ and get this response:
 
 so that I know I successfully created a Task that is saved in the database.
 
-### Get Tasks: Getting Saved Tasks
+### [x] Get Tasks: Getting Saved Tasks
 
 As a client, I want to be able to make a `GET` request to `/tasks` when there is at least one saved task and get this response:
 

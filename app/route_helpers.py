@@ -8,6 +8,8 @@ def validate_record_by_id(cls, id):
     Tries to fetch a record from the database using 
     primary key id. 
 
+    Takes: class of model and id of record
+
     Returns record to the calling function on success.
     Calls abort and sends JSON to client on failure.  
     """

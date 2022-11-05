@@ -32,6 +32,7 @@ def handle_task_post():
     Requires json request body.
 
     Returns json summary of new task object. 
+    Returns 400 status and json summary on error. 
     """
 
 
@@ -68,6 +69,12 @@ def handle_task_post():
 
 @bp.route("/<id>", methods=["GET"])
 def handle_single_task_record(id):
+    """
+    Fetches a single task record by id.
+    
+    Returns: json summary of task on success.
+    Error: 404 or 400 response with json summary.
+    """
 
     book = route_helpers.validate_record_by_id(Task, id)
     return { "task": book.to_dict() }
@@ -77,6 +84,15 @@ def handle_single_task_record(id):
 
 @bp.route("/<id>", methods=["PUT"])
 def update_task(id):
+    """
+    Update task.title and/or task.body by id.
+    Does not update task.completed_at.
+
+    Returns: 200 and json body of updated record.
+    Error: 404 or 400 and json body.
+    """
+    # REVIEW Docstrings. 
+
     task = route_helpers.validate_record_by_id(Task, id)
 
     request_body = request.get_json()
@@ -89,16 +105,18 @@ def update_task(id):
     return make_response(jsonify({"task": task.to_dict()}))
 
 
-# ```json
-# {
-#   "details": "Task 1 \"Go on my daily walk 🏞\" successfully deleted"
-# }
-# ```
-
 # DONE Delete Task: Deleting a Task
 
 @bp.route("/<id>", methods=["DELETE"])
 def delete_task(id):
+    """
+    Delete task.title and/or task.body by id.
+    Does not update task.completed_at.
+
+    Returns: 200 and json containing task.id and task.title.
+    Error: 404 or 400 and json body.
+    """
+
     task = route_helpers.validate_record_by_id(Task, id)
 
     db.session.delete(task)

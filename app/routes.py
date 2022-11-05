@@ -143,11 +143,11 @@ def delete_task(id):
     return make_response(
         jsonify({"details": f'Task {task.id} "{task.title}" successfully deleted'})
     )
-### TODO Mark Complete on an Incompleted Task
-### TODO Mark Incomplete on a Completed Task
-### TODO Mark Complete on a Completed Task
-### TODO Mark Incomplete on an Incompleted Task
-### TODO Mark Complete and Mark Incomplete for Missing Tasks
+### DONE Mark Complete on an Incompleted Task
+### DONE Mark Incomplete on a Completed Task
+### DONE Mark Complete on a Completed Task
+### DONE Mark Incomplete on an Incompleted Task
+### DONE Mark Complete and Mark Incomplete for Missing Tasks
 
 @bp.route("/<id>/mark_<mark>", methods=["PATCH"])
 def mark_task_complete_incomplete(id, mark):
@@ -156,7 +156,9 @@ def mark_task_complete_incomplete(id, mark):
     task.completed at. 
     
     Returns dict of modified record on success.
-    Returns 400 or 404 on failure. 
+    Returns 400 or 404 on failure, including an invalid
+    mark. ("/task/id/mark_hamil", not valid for this 
+    db at least.)
     
     """
 
@@ -176,7 +178,7 @@ def mark_task_complete_incomplete(id, mark):
         task.completed_at = None
     
     db.session.commit()
-    return make_response(jsonify(task.to_dict()), 200)
+    return make_response(jsonify({"task": task.to_dict()}), 200)
 
 
 

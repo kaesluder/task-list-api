@@ -23,7 +23,7 @@ The following are required routes for wave 3. Feel free to implement the routes 
 - SQL's value of `null` is similar to Python's value of `None`.
 - Python has a [datetime library](https://docs.python.org/3/library/datetime.html#module-datetime) which we recommend using to represent dates in model attributes.
 
-### Mark Complete on an Incompleted Task
+### TODO Mark Complete on an Incompleted Task
 
 Given a task that has:
 
@@ -47,7 +47,7 @@ then the task is updated, so that its `completed_at` value is the current date, 
 }
 ```
 
-### Mark Incomplete on a Completed Task
+### TODO Mark Incomplete on a Completed Task
 
 Given a task that has:
 
@@ -71,7 +71,7 @@ then the task is updated, so that its `completed_at` value is `null`/`None`, and
 }
 ```
 
-### Mark Complete on a Completed Task
+### TODO Mark Complete on a Completed Task
 
 Given a task that has:
 
@@ -95,7 +95,7 @@ then I want this to behave exactly like `/tasks/1/mark_complete` for an incomple
 }
 ```
 
-### Mark Incomplete on an Incompleted Task
+### TODO Mark Incomplete on an Incompleted Task
 
 Given a task that has:
 
@@ -119,7 +119,7 @@ then I want this to behave exactly like `/tasks/1/mark_incomplete` for a complet
 }
 ```
 
-## Mark Complete and Mark Incomplete for Missing Tasks
+### TODO Mark Complete and Mark Incomplete for Missing Tasks
 
 Given that there are no tasks with the ID `1`,
 

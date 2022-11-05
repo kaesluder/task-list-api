@@ -3,6 +3,7 @@ from app.models.task import Task
 from app import db
 from app import route_helpers
 from flask import Blueprint, jsonify, abort, make_response, request
+from datetime import datetime
 
 bp = Blueprint("tasks", __name__, url_prefix="/tasks")
 
@@ -91,8 +92,8 @@ def handle_single_task_record(id):
     Error: 404 or 400 response with json summary.
     """
 
-    book = route_helpers.validate_record_by_id(Task, id)
-    return {"task": book.to_dict()}
+    task = route_helpers.validate_record_by_id(Task, id)
+    return {"task": task.to_dict()}
 
 
 # DONE Update Task
@@ -142,3 +143,48 @@ def delete_task(id):
     return make_response(
         jsonify({"details": f'Task {task.id} "{task.title}" successfully deleted'})
     )
+### TODO Mark Complete on an Incompleted Task
+### TODO Mark Incomplete on a Completed Task
+### TODO Mark Complete on a Completed Task
+### TODO Mark Incomplete on an Incompleted Task
+### TODO Mark Complete and Mark Incomplete for Missing Tasks
+
+@bp.route("/<id>/mark_<mark>", methods=["PATCH"])
+def mark_task_complete_incomplete(id, mark):
+    """
+    Modifies a record to add or remove timestamp from
+    task.completed at. 
+    
+    Returns dict of modified record on success.
+    Returns 400 or 404 on failure. 
+    
+    """
+
+    # Error Check: if the mark is *not* complete or incomplete, 
+    # stop processing and return 400 status to client. 
+    if mark not in {"complete", "incomplete"}:
+        abort(make_response(jsonify({"message": f"mark_{mark} invalid"}), 400))
+
+    # grab the existing task, validate_record returns 400 or 404 if 
+    # given bad input. 
+    task = route_helpers.validate_record_by_id(Task, id)
+
+    if mark == "complete":
+        dt = datetime.now()
+        task.completed_at = dt
+    elif mark == "incomplete":
+        task.completed_at = None
+    
+    db.session.commit()
+    return make_response(jsonify(task.to_dict()), 200)
+
+
+
+
+
+
+    
+
+
+
+    return f"{id} {mark}"

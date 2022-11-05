@@ -15,7 +15,7 @@ def handle_tasks_list_get():
     Returns a JSON list of all tasks in database.
     """
 
-    tasks = Task.query.all()
+    tasks = Task.query.order_by(Task.title).all()
 
     tasks_list = []
     for t in tasks:
@@ -31,16 +31,14 @@ def handle_task_post():
 
     Requires json request body.
 
-    Returns json summary of new task object. 
-    Returns 400 status and json summary on error. 
+    Returns json summary of new task object.
+    Returns 400 status and json summary on error.
     """
-
 
     request_body = request.get_json()
 
     # error checking
     # DONE Create a Task: Invalid Task With Missing Data
-
 
     if "title" not in request_body:
         abort(make_response(jsonify({"details": "Invalid data"}), 400))
@@ -48,14 +46,12 @@ def handle_task_post():
     if "description" not in request_body:
         abort(make_response(jsonify({"details": "Invalid data"}), 400))
 
-        
-
-
     new_task = Task(
         title=request_body["title"],
-        description=request_body["description"],
-        completed_at=None,
-    )
+        description=request_body["description"]
+            )
+
+    print(new_task.to_dict)
 
     db.session.add(new_task)
     db.session.commit()
@@ -65,22 +61,25 @@ def handle_task_post():
 
     return make_response(return_message, 201)
 
+
 # DONE Get One Task: One Saved Task
+
 
 @bp.route("/<id>", methods=["GET"])
 def handle_single_task_record(id):
     """
     Fetches a single task record by id.
-    
+
     Returns: json summary of task on success.
     Error: 404 or 400 response with json summary.
     """
 
     book = route_helpers.validate_record_by_id(Task, id)
-    return { "task": book.to_dict() }
+    return {"task": book.to_dict()}
 
 
 # DONE Update Task
+
 
 @bp.route("/<id>", methods=["PUT"])
 def update_task(id):
@@ -91,7 +90,7 @@ def update_task(id):
     Returns: 200 and json body of updated record.
     Error: 404 or 400 and json body.
     """
-    # REVIEW Docstrings. 
+    # REVIEW Docstrings.
 
     task = route_helpers.validate_record_by_id(Task, id)
 
@@ -106,6 +105,7 @@ def update_task(id):
 
 
 # DONE Delete Task: Deleting a Task
+
 
 @bp.route("/<id>", methods=["DELETE"])
 def delete_task(id):
@@ -122,7 +122,10 @@ def delete_task(id):
     db.session.delete(task)
     db.session.commit()
 
-    return make_response(jsonify({"details": f"Task {task.id} \"{task.title}\" successfully deleted"}))
+    return make_response(
+        jsonify({"details": f'Task {task.id} "{task.title}" successfully deleted'})
+    )
 
 
-
+### TODO Sorting Tasks: By Title, Ascending
+### TODO Sorting Tasks: By Title, Descending

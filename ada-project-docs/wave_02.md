@@ -17,7 +17,7 @@ The following are required routes for wave 2. Feel free to implement the routes 
   - You are free to add additional features, as long as the wave 2 tests still pass. However, we recommend that you consider the future waves, first.
 - Some tests use a fixture named `three_tasks` that is defined in `tests/conftest.py`. This fixture saves three different tasks with three different titles to the test database.
 
-### Sorting Tasks: By Title, Ascending
+### TODO Sorting Tasks: By Title, Ascending
 
 As a client, I want to be able to make a `GET` request to `/tasks?sort=asc` when there is more than one saved task, and get an array of tasks sorted by **title**. The titles should be in _ascending_ order, where a task with the title "A" is sorted before a task with the title "B."
 
@@ -42,7 +42,7 @@ I want to get this response:
 ]
 ```
 
-### Sorting Tasks: By Title, Descending
+### TODO Sorting Tasks: By Title, Descending
 
 As a client, I want to be able to make a `GET` request to `/tasks?sort=desc` when there is more than one saved task, and get an array of tasks sorted by **title**. The titles should be in _descending_ order, where a task with the title "B" is sorted before a task with the title "A."
 

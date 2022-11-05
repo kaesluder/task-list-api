@@ -13,6 +13,9 @@ def handle_tasks_list_get():
     Endpoint: tasks
     Method: GET
     Returns a JSON list of all tasks in database.
+
+    Default sort order is by id. If sort is in requets.args
+    sort alphabetically by title. (asc or desc)
     """
 
     args = request.args
@@ -20,6 +23,7 @@ def handle_tasks_list_get():
     task_query = Task.query 
 
     # set sort order
+    # REVIEW Consider moving sort logic to anothr function. 
 
     sort_order = args.get("sort")
 
@@ -31,9 +35,8 @@ def handle_tasks_list_get():
         tasks = task_query.all()
 
 
-    tasks_list = []
-    for t in tasks:
-        tasks_list.append(t.to_dict())
+
+    tasks_list = [t.to_dict() for t in tasks]
     return jsonify(tasks_list)
 
 

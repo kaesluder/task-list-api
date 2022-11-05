@@ -133,7 +133,7 @@ As a client, I want to be able to make a `GET` request to `/tasks/1` when there 
 }
 ```
 
-### TODO Update Task
+### DONE Update Task
 
 As a client, I want to be able to make a `PUT` request to `/tasks/1` when there is at least one saved task with this request body:
 
@@ -161,7 +161,7 @@ and get this response:
 
 Note that the update endpoint does update the `completed_at` attribute. This will be updated with custom endpoints implemented in Wave 03.
 
-### TODO Delete Task: Deleting a Task
+### DONE Delete Task: Deleting a Task
 
 As a client, I want to be able to make a `DELETE` request to `/tasks/1` when there is at least one saved task and get this response:
 
@@ -173,7 +173,7 @@ As a client, I want to be able to make a `DELETE` request to `/tasks/1` when the
 }
 ```
 
-### TODO No matching Task: Get, Update, and Delete
+### DONE No matching Task: Get, Update, and Delete
 
 As a client, if I make any of the following requests:
 
@@ -190,7 +190,7 @@ You may choose the response body.
 Make sure to complete the tests for non-existing tasks to check that the correct response body is returned.
  
 
-### TODO Create a Task: Invalid Task With Missing Data
+### DONE Create a Task: Invalid Task With Missing Data
 
 #### Missing `title`
 

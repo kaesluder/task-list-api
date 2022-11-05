@@ -36,6 +36,20 @@ def handle_task_post():
 
 
     request_body = request.get_json()
+
+    # error checking
+    # DONE Create a Task: Invalid Task With Missing Data
+
+
+    if "title" not in request_body:
+        abort(make_response(jsonify({"details": "Invalid data"}), 400))
+
+    if "description" not in request_body:
+        abort(make_response(jsonify({"details": "Invalid data"}), 400))
+
+        
+
+
     new_task = Task(
         title=request_body["title"],
         description=request_body["description"],
@@ -59,33 +73,10 @@ def handle_single_task_record(id):
     return { "task": book.to_dict() }
 
 
-# TODO Update Task
-
-
-# ```json
-# {
-#   "title": "Updated Task Title",
-#   "description": "Updated Test Description",
-# }
-# ```
-
-# and get this response:
-
-# `200 OK`
-
-# ```json
-# {
-#   "task": {
-#     "id": 1,
-#     "title": "Updated Task Title",
-#     "description": "Updated Test Description",
-#     "is_complete": false
-#   }
-# }
-# ```
+# DONE Update Task
 
 @bp.route("/<id>", methods=["PUT"])
-def update_book(id):
+def update_task(id):
     task = route_helpers.validate_record_by_id(Task, id)
 
     request_body = request.get_json()
@@ -98,30 +89,22 @@ def update_book(id):
     return make_response(jsonify({"task": task.to_dict()}))
 
 
+# ```json
+# {
+#   "details": "Task 1 \"Go on my daily walk 🏞\" successfully deleted"
+# }
+# ```
 
-# TODO Delete Task: Deleting a Task
-# TODO Create a Task: Invalid Task With Missing Data
+# DONE Delete Task: Deleting a Task
+
+@bp.route("/<id>", methods=["DELETE"])
+def delete_task(id):
+    task = route_helpers.validate_record_by_id(Task, id)
+
+    db.session.delete(task)
+    db.session.commit()
+
+    return make_response(jsonify({"details": f"Task {task.id} \"{task.title}\" successfully deleted"}))
 
 
 
-# @books_bp.route("/<book_id>", methods=["PUT"])
-# def update_book(book_id):
-#     book = validate_model(Book, book_id)
-
-#     request_body = request.get_json()
-
-#     book.title = request_body["title"]
-#     book.description = request_body["description"]
-
-#     db.session.commit()
-
-#     return make_response(jsonify(f"Book #{book.id} successfully updated"))
-
-# @books_bp.route("/<book_id>", methods=["DELETE"])
-# def delete_book(book_id):
-#     book = validate_model(Book, book_id)
-
-#     db.session.delete(book)
-#     db.session.commit()
-
-#     return make_response(jsonify(f"Book #{book.id} successfully deleted"))

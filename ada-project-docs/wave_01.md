@@ -116,7 +116,7 @@ As a client, I want to be able to make a `GET` request to `/tasks` when there ar
 []
 ```
 
-### TODO Get One Task: One Saved Task
+### DONE Get One Task: One Saved Task
 
 As a client, I want to be able to make a `GET` request to `/tasks/1` when there is at least one saved task and get this response:
 
@@ -173,7 +173,7 @@ As a client, I want to be able to make a `DELETE` request to `/tasks/1` when the
 }
 ```
 
-### No matching Task: Get, Update, and Delete
+### TODO No matching Task: Get, Update, and Delete
 
 As a client, if I make any of the following requests:
 

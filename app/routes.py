@@ -15,7 +15,21 @@ def handle_tasks_list_get():
     Returns a JSON list of all tasks in database.
     """
 
-    tasks = Task.query.order_by(Task.title).all()
+    args = request.args
+
+    task_query = Task.query 
+
+    # set sort order
+
+    sort_order = args.get("sort")
+
+    if sort_order == "asc":
+        tasks = task_query.order_by(Task.title.asc())
+    elif sort_order == "desc":
+        tasks = task_query.order_by(Task.title.desc())
+    else:
+        tasks = task_query.all()
+
 
     tasks_list = []
     for t in tasks:
@@ -125,7 +139,3 @@ def delete_task(id):
     return make_response(
         jsonify({"details": f'Task {task.id} "{task.title}" successfully deleted'})
     )
-
-
-### TODO Sorting Tasks: By Title, Ascending
-### TODO Sorting Tasks: By Title, Descending

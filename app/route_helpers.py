@@ -15,11 +15,11 @@ def validate_record_by_id(cls, id):
     try:
         id = int(id)
     except:
-        abort(make_response(jsonify({"message":f"{cls} {id} invalid"}), 400))
+        abort(make_response(jsonify({"message":f"{cls.__name__} {id} invalid"}), 400))
 
     record = cls.query.get(id)
 
     if not record:
-        abort(make_response(jsonify({"message":f"{cls} {id} not found"}), 404))
+        abort(make_response(jsonify({"message":f"{cls.__name__} {id} not found"}), 404))
 
     return record

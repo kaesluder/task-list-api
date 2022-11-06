@@ -18,6 +18,14 @@ def slackbot_post(text):
     auth_token = "Bearer " + os.environ["SLACKBOT_TOKEN"]
     channel = os.environ["SLACKBOT_CHANNEL"]
     endpoint = os.environ["SLACKBOT_ENDPOINT"]
+    
+
+    # hack to avoid spamming slack during development. 
+    # PONY figure out way to set up dummy request/response objects.     
+    testing = os.environ["SLACKBOT_DISABLED"]
+    if testing == "YES":
+        return (True, {"message": "Slackbot disabled for testing."})
+
 
     request_body = {"channel": channel, "text": text}
 

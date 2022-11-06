@@ -10,7 +10,7 @@ They contain a title to name the goal.
 
 Our goal for this wave is to be able to create, read, update, and delete different goals. We will create RESTful routes for these different operations.
 
-## Writing Tests
+## TODO Wave 5: Writing Tests
 
 This wave requires more test writing. 
 - As with incomplete tests in other waves, you should comment out the `Exception` when implementing a test.
@@ -24,7 +24,7 @@ This wave requires more test writing.
 
 # Requirements
 
-## Goal Model
+## TODO Goal Model
 
 There should be a `Goal` model that lives in `app/models/goal.py`.
 
@@ -39,11 +39,11 @@ Goals should contain these attributes. Feel free to change the name of the `goal
   - `flask db migrate` every time there's a change in models, in order to generate migrations
   - `flask db upgrade` to run all generated migrations
 
-## CRUD for Goals
+## TODO CRUD for Goals
 
 The following are required routes for wave 5. Feel free to implement the routes in any order within this wave.
 
-### Create a Goal: Valid Goal
+### TODO Create a Goal: Valid Goal
 
 As a client, I want to be able to make a `POST` request to `/goals` with the following HTTP request body
 
@@ -68,7 +68,7 @@ and get this response:
 
 so that I know I successfully created a goal that is saved in the database.
 
-### Get Goals: Getting Saved Goals
+### TODO Get Goals: Getting Saved Goals
 
 As a client, I want to be able to make a `GET` request to `/goals` when there is at least one saved goal and get this response:
 
@@ -87,7 +87,7 @@ As a client, I want to be able to make a `GET` request to `/goals` when there is
 ]
 ```
 
-### Get Goals: No Saved Goals
+### TODO Get Goals: No Saved Goals
 
 As a client, I want to be able to make a `GET` request to `/goals` when there are zero saved goals and get this response:
 
@@ -97,7 +97,7 @@ As a client, I want to be able to make a `GET` request to `/goals` when there ar
 []
 ```
 
-### Get One Goal: One Saved Goal
+### TODO Get One Goal: One Saved Goal
 
 As a client, I want to be able to make a `GET` request to `/goals/1` when there is at least one saved goal and get this response:
 
@@ -113,7 +113,7 @@ As a client, I want to be able to make a `GET` request to `/goals/1` when there 
 ```
 
 
-### Update Goal
+### TODO Update Goal
 
 As a client, I want to be able to make a `PUT` request to `/goals/1` when there is at least one saved goal with this request body:
 
@@ -136,7 +136,7 @@ and get this response:
 }
 ```
 
-### Delete Goal: Deleting a Goal
+### TODO Delete Goal: Deleting a Goal
 
 As a client, I want to be able to make a `DELETE` request to `/goals/1` when there is at least one saved goal and get this response:
 
@@ -148,7 +148,7 @@ As a client, I want to be able to make a `DELETE` request to `/goals/1` when the
 }
 ```
 
-### No matching Goal: Get, Update, and Delete
+### TODO No matching Goal: Get, Update, and Delete
 
 As a client, if I make any of the following requests:
 
@@ -164,7 +164,7 @@ You may choose the response body.
 
  Make sure to complete the tests for non-existing tasks to check that the correct response body is returned.
 
-### Create a Goal: Invalid Goal With Missing Title
+### TODO Create a Goal: Invalid Goal With Missing Title
 
 As a client, I want to be able to make a `POST` request to `/goals` with the following HTTP request body
 

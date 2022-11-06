@@ -9,7 +9,7 @@ class Task(db.Model):
 
     def to_dict(self):
         result_dict = dict(
-            # evaluates as False if null, True otherwise 
+            # evaluates as False if null, True otherwise
             is_complete=bool(self.completed_at),
             title=self.title,
             id=self.id,

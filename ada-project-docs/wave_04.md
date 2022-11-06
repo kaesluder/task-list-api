@@ -19,7 +19,7 @@ To complete this wave, follow these steps:
 1. Modify the `/tasks/<task_id>/mark_complete` route to make a call to the Slack API
 1. Use Postman to verify your work
 
-### TODO Setup a Slack Workspace
+### DONE Setup a Slack Workspace
 
 For this Task List API project, you will need an independent Slack workspace to use.
 
@@ -27,7 +27,7 @@ Create an independent Slack workspace. Follow classroom instructions to find out
 
 In your independent Slack workspace, create a public channel named `task-notifications`.
 
-### TODO Create a Slackbot
+### DONE Create a Slackbot
 
 Ensure that you are able to log into Slack's API/Apps dashboard:
 
@@ -48,7 +48,7 @@ Making an app should bring you to a new page that lists "Add features and functi
 
 ![](assets/redirect_slackbot_splash.png)
 
-### TODO Configure Your Slackbot, and Get Your Slackbot API Key (Token)
+### DONE Configure Your Slackbot, and Get Your Slackbot API Key (Token)
 
 After seeing the header "Add features and functionality" and expanding it, click "Permissions."
 
@@ -87,7 +87,7 @@ Whenever you want to go back to this page, follow these steps:
 
 ![](assets/slackbot_your_apps.png)
 
-### TODO Verify the API Key with the Slack Tester
+### DONE Verify the API Key with the Slack Tester
 
 We want to verify that our new Slackbot API key works with the Slack API functionality we need.
 
@@ -122,7 +122,7 @@ Scroll down to see the HTTP response. Answer the following questions:
 - Did we get an error emssage? If so, why?
 - What is the shape of this JSON? Is it a JSON object or array? What keys and values are there?
 
-### TODO Verify with Postman
+### DONE Verify with Postman
 
 Let's verify that this API call works even in Postman!
 

@@ -21,10 +21,10 @@ def handle_tasks_list_get():
 
     args = request.args
 
-    task_query = Task.query 
+    task_query = Task.query
 
     # set sort order
-    # REVIEW Consider moving sort logic to anothr function. 
+    # REVIEW Consider moving sort logic to anothr function.
 
     sort_order = args.get("sort")
 
@@ -34,8 +34,6 @@ def handle_tasks_list_get():
         tasks = task_query.order_by(Task.title.desc())
     else:
         tasks = task_query.all()
-
-
 
     tasks_list = [t.to_dict() for t in tasks]
     return jsonify(tasks_list)
@@ -65,9 +63,8 @@ def handle_task_post():
         abort(make_response(jsonify({"details": "Invalid data"}), 400))
 
     new_task = Task(
-        title=request_body["title"],
-        description=request_body["description"]
-            )
+        title=request_body["title"], description=request_body["description"]
+    )
 
     print(new_task.to_dict)
 
@@ -143,32 +140,35 @@ def delete_task(id):
     return make_response(
         jsonify({"details": f'Task {task.id} "{task.title}" successfully deleted'})
     )
+
+
 ### DONE Mark Complete on an Incompleted Task
 ### DONE Mark Incomplete on a Completed Task
 ### DONE Mark Complete on a Completed Task
 ### DONE Mark Incomplete on an Incompleted Task
 ### DONE Mark Complete and Mark Incomplete for Missing Tasks
 
+
 @bp.route("/<id>/mark_<mark>", methods=["PATCH"])
 def mark_task_complete_incomplete(id, mark):
     """
     Modifies a record to add or remove timestamp from
-    task.completed at. 
-    
+    task.completed at.
+
     Returns dict of modified record on success.
     Returns 400 or 404 on failure, including an invalid
-    mark. ("/task/id/mark_hamil", not valid for this 
+    mark. ("/task/id/mark_hamil", not valid for this
     db at least.)
-    
+
     """
 
-    # Error Check: if the mark is *not* complete or incomplete, 
-    # stop processing and return 400 status to client. 
+    # Error Check: if the mark is *not* complete or incomplete,
+    # stop processing and return 400 status to client.
     if mark not in {"complete", "incomplete"}:
         abort(make_response(jsonify({"message": f"mark_{mark} invalid"}), 400))
 
-    # grab the existing task, validate_record returns 400 or 404 if 
-    # given bad input. 
+    # grab the existing task, validate_record returns 400 or 404 if
+    # given bad input.
     task = route_helpers.validate_record_by_id(Task, id)
 
     if mark == "complete":
@@ -176,17 +176,8 @@ def mark_task_complete_incomplete(id, mark):
         task.completed_at = dt
     elif mark == "incomplete":
         task.completed_at = None
-    
+
     db.session.commit()
     return make_response(jsonify({"task": task.to_dict()}), 200)
-
-
-
-
-
-
-    
-
-
 
     return f"{id} {mark}"

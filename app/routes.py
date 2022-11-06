@@ -188,4 +188,3 @@ def mark_task_complete_incomplete(id, mark):
     db.session.commit()
     return make_response(jsonify({"task": task.to_dict()}), 200)
 
-    return f"{id} {mark}"

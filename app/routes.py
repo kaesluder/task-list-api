@@ -4,6 +4,7 @@ from app import db
 from app import route_helpers
 from flask import Blueprint, jsonify, abort, make_response, request
 from datetime import datetime
+from app.slackbot import slackbot_post
 
 bp = Blueprint("tasks", __name__, url_prefix="/tasks")
 
@@ -174,6 +175,13 @@ def mark_task_complete_incomplete(id, mark):
     if mark == "complete":
         dt = datetime.now()
         task.completed_at = dt
+
+        slack_status, slack_result = slackbot_post(f"{task.title} marked complete.")
+
+        if not slack_status:
+            print("Slack post failed:")
+            print(slack_result)
+
     elif mark == "incomplete":
         task.completed_at = None
 

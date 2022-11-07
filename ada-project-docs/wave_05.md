@@ -10,7 +10,7 @@ They contain a title to name the goal.
 
 Our goal for this wave is to be able to create, read, update, and delete different goals. We will create RESTful routes for these different operations.
 
-## TODO Wave 5: Writing Tests
+## DONE Wave 5: Writing Tests
 
 This wave requires more test writing. 
 - As with incomplete tests in other waves, you should comment out the `Exception` when implementing a test.
@@ -39,7 +39,7 @@ Goals should contain these attributes. Feel free to change the name of the `goal
   - `flask db migrate` every time there's a change in models, in order to generate migrations
   - `flask db upgrade` to run all generated migrations
 
-## TODO CRUD for Goals
+## DONE CRUD for Goals
 
 The following are required routes for wave 5. Feel free to implement the routes in any order within this wave.
 
@@ -113,7 +113,7 @@ As a client, I want to be able to make a `GET` request to `/goals/1` when there 
 ```
 
 
-### TODO Update Goal
+### DONE Update Goal
 
 As a client, I want to be able to make a `PUT` request to `/goals/1` when there is at least one saved goal with this request body:
 
@@ -136,7 +136,7 @@ and get this response:
 }
 ```
 
-### TODO Delete Goal: Deleting a Goal
+### DONE Delete Goal: Deleting a Goal
 
 As a client, I want to be able to make a `DELETE` request to `/goals/1` when there is at least one saved goal and get this response:
 
@@ -148,7 +148,7 @@ As a client, I want to be able to make a `DELETE` request to `/goals/1` when the
 }
 ```
 
-### TODO No matching Goal: Get, Update, and Delete
+### DONE No matching Goal: Get, Update, and Delete
 
 As a client, if I make any of the following requests:
 
@@ -164,7 +164,7 @@ You may choose the response body.
 
  Make sure to complete the tests for non-existing tasks to check that the correct response body is returned.
 
-### TODO Create a Goal: Invalid Goal With Missing Title
+### DONE Create a Goal: Invalid Goal With Missing Title
 
 As a client, I want to be able to make a `POST` request to `/goals` with the following HTTP request body
 

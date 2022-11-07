@@ -86,99 +86,44 @@ def handle_single_goal_record(id):
     return {"goal": goal.to_dict()}
 
 
-# # DONE Update Task
+@bp.route("/<id>", methods=["PUT"])
+def update_goal(id):
+    """
+    Update goal.title and/or goal.body by id.
+    Does not update goal.completed_at.
+
+    Returns: 200 and json body of updated record.
+    Error: 404 or 400 and json body.
+    """
+    # REVIEW Docstrings.
+
+    goal = route_helpers.validate_record_by_id(Goal, id)
+
+    request_body = request.get_json()
+
+    goal.title = request_body["title"]
+
+    db.session.commit()
+
+    return make_response(jsonify({"goal": goal.to_dict()}))
 
 
-# @bp.route("/<id>", methods=["PUT"])
-# def update_task(id):
-#     """
-#     Update task.title and/or task.body by id.
-#     Does not update task.completed_at.
 
-#     Returns: 200 and json body of updated record.
-#     Error: 404 or 400 and json body.
-#     """
-#     # REVIEW Docstrings.
+@bp.route("/<id>", methods=["DELETE"])
+def delete_goal(id):
+    """
+    Delete goal.title and/or goal.body by id.
 
-#     task = route_helpers.validate_record_by_id(Task, id)
+    Returns: 200 and json containing goal.id and goal.title.
+    Error: 404 or 400 and json body.
+    """
 
-#     request_body = request.get_json()
+    goal = route_helpers.validate_record_by_id(Goal, id)
 
-#     task.title = request_body["title"]
-#     task.description = request_body["description"]
+    db.session.delete(goal)
+    db.session.commit()
 
-#     db.session.commit()
-
-#     return make_response(jsonify({"task": task.to_dict()}))
-
-
-# # DONE Delete Task: Deleting a Task
-
-
-# @bp.route("/<id>", methods=["DELETE"])
-# def delete_task(id):
-#     """
-#     Delete task.title and/or task.body by id.
-#     Does not update task.completed_at.
-
-#     Returns: 200 and json containing task.id and task.title.
-#     Error: 404 or 400 and json body.
-#     """
-
-#     task = route_helpers.validate_record_by_id(Task, id)
-
-#     db.session.delete(task)
-#     db.session.commit()
-
-#     return make_response(
-#         jsonify({"details": f'Task {task.id} "{task.title}" successfully deleted'})
-#     )
-
-
-# ### DONE Mark Complete on an Incompleted Task
-# ### DONE Mark Incomplete on a Completed Task
-# ### DONE Mark Complete on a Completed Task
-# ### DONE Mark Incomplete on an Incompleted Task
-# ### DONE Mark Complete and Mark Incomplete for Missing Tasks
-
-
-# @bp.route("/<id>/mark_<mark>", methods=["PATCH"])
-# def mark_task_complete_incomplete(id, mark):
-#     """
-#     Modifies a record to add or remove timestamp from
-#     task.completed at.
-
-#     Returns dict of modified record on success.
-#     Returns 400 or 404 on failure, including an invalid
-#     mark. ("/task/id/mark_hamil", not valid for this
-#     db at least.)
-
-#     """
-
-#     # Error Check: if the mark is *not* complete or incomplete,
-#     # stop processing and return 400 status to client.
-#     if mark not in {"complete", "incomplete"}:
-#         abort(make_response(jsonify({"message": f"mark_{mark} invalid"}), 400))
-
-#     # grab the existing task, validate_record returns 400 or 404 if
-#     # given bad input.
-#     task = route_helpers.validate_record_by_id(Task, id)
-
-#     if mark == "complete":
-#         dt = datetime.now()
-#         task.completed_at = dt
-
-#         slack_status, slack_result = slackbot_post(f"{task.title} marked complete.")
-
-#         # dump slack debug info to stdout for now. 
-#         # not sure how to test this branch further. 
-#         if not slack_status:
-#             print("Slack post failed:")
-#             print(slack_result)
-
-#     elif mark == "incomplete":
-#         task.completed_at = None
-
-#     db.session.commit()
-#     return make_response(jsonify({"task": task.to_dict()}), 200)
+    return make_response(
+        jsonify({"details": f'Goal {goal.id} "{goal.title}" successfully deleted'})
+    )
 

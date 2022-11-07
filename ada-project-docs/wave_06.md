@@ -22,7 +22,7 @@ Secondly, we should create our new route, `/goals/<goal_id>/tasks`, so that our 
 - Use the tests in `tests/test_wave_06.py` to guide your implementation.
 - Some tests use a fixture named `one_task_belongs_to_one_goal` that is defined in `tests/conftest.py`. This fixture saves a task and a goal to the test database, and uses SQLAlchemy to associate the goal and task together.
 
-### Updates to the Goal Model
+### TODO Updates to the Goal Model
 
 Use independent research to discover how to set up a one-to-many relationship in Flask.
 
@@ -32,7 +32,7 @@ After learning the strategy for creating a one-to-many relationship, in the Goal
 
 - Setting the `lazy` value to `True`
 
-### Updates to the Task Model
+### TODO Updates to the Task Model
 
 Use independent research to discover how to set up a one-to-many relationship in Flask.
 
@@ -45,7 +45,7 @@ After learning the strategy for creating a one-to-many relationship, in the Task
 
 Remember to run `flask db migrate` and `flask db upgrade` whenever there is a change to the model.
 
-### Sending a List of Task IDs to a Goal
+### TODO Sending a List of Task IDs to a Goal
 
 Given:
 
@@ -69,7 +69,7 @@ Then the three `Task`s belong to the `Goal` and it gets updated in the database,
 }
 ```
 
-### Getting Tasks of One Goal
+### TODO Getting Tasks of One Goal
 
 Given a goal that has:
 
@@ -106,7 +106,7 @@ then I get this response:
 }
 ```
 
-### Getting Tasks of One Goal: No Matching Tasks
+### TODO Getting Tasks of One Goal: No Matching Tasks
 
 Given a goal that has:
 
@@ -129,7 +129,7 @@ then I get this response:
 }
 ```
 
-### Getting Tasks of One Goal: No Matching Goal
+### TODO Getting Tasks of One Goal: No Matching Goal
 
 Given that no goals exist,
 

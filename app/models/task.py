@@ -7,6 +7,11 @@ class Task(db.Model):
     description = db.Column(db.String)
     completed_at = db.Column(db.DateTime)
 
+    # many to one
+    goal_id = db.Column(db.Integer, db.ForeignKey('task.id'))
+    goal = db.relationship("Goal", back_populates="task")
+
+
     def to_dict(self):
         result_dict = dict(
             # evaluates as False if null, True otherwise

@@ -2,4 +2,19 @@ from app import db
 
 
 class Goal(db.Model):
-    goal_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String, nullable=False)
+
+    def to_dict(self):
+        result_dict = dict(
+            # evaluates as False if null, True otherwise
+            title=self.title,
+            id=self.id,
+        )
+        return result_dict
+
+    @classmethod
+    def from_dict(cls, goal_dict):
+        return cls(
+            title=goal_dict["title"]
+            )

@@ -149,7 +149,7 @@ Press "Send" and see the Slack message come through!
 
 - We could put in the token as a query param. However, the Slack API documentation states that it prefers API keys to be sent in the "Authorization" request header.
 
-### TODO Modify `/tasks/<task_id>/mark_complete` to Call the Slack API
+### DONE Modify `/tasks/<task_id>/mark_complete` to Call the Slack API
 
 Now that we've verified that we can successfully make a request to the Slack API, let's write some code to automatically call the Slack API from the API we've created!
 

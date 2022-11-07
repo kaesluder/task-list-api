@@ -24,7 +24,7 @@ This wave requires more test writing.
 
 # Requirements
 
-## TODO Goal Model
+## DONE Goal Model
 
 There should be a `Goal` model that lives in `app/models/goal.py`.
 
@@ -43,7 +43,7 @@ Goals should contain these attributes. Feel free to change the name of the `goal
 
 The following are required routes for wave 5. Feel free to implement the routes in any order within this wave.
 
-### TODO Create a Goal: Valid Goal
+### DONE Create a Goal: Valid Goal
 
 As a client, I want to be able to make a `POST` request to `/goals` with the following HTTP request body
 
@@ -68,7 +68,7 @@ and get this response:
 
 so that I know I successfully created a goal that is saved in the database.
 
-### TODO Get Goals: Getting Saved Goals
+### DONE Get Goals: Getting Saved Goals
 
 As a client, I want to be able to make a `GET` request to `/goals` when there is at least one saved goal and get this response:
 
@@ -87,7 +87,7 @@ As a client, I want to be able to make a `GET` request to `/goals` when there is
 ]
 ```
 
-### TODO Get Goals: No Saved Goals
+### DONE Get Goals: No Saved Goals
 
 As a client, I want to be able to make a `GET` request to `/goals` when there are zero saved goals and get this response:
 
@@ -97,7 +97,7 @@ As a client, I want to be able to make a `GET` request to `/goals` when there ar
 []
 ```
 
-### TODO Get One Goal: One Saved Goal
+### DONE Get One Goal: One Saved Goal
 
 As a client, I want to be able to make a `GET` request to `/goals/1` when there is at least one saved goal and get this response:
 

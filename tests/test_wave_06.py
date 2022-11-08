@@ -20,10 +20,25 @@ def test_post_task_ids_to_goal(client, one_goal, three_tasks):
     }
 
     # Check that Goal was updated in the db
-    assert len(Goal.query.get(1).task) == 3
+    assert len(Goal.query.get(1).tasks) == 3
 
+def test_post_task_ids_missing_task(client, one_goal, three_tasks):
+    # Act
+    response = client.post("/goals/1/tasks", json={
+        "task_ids": [1, 2, 3, 4]
+    })
+    response_body = response.get_json()
 
-@pytest.mark.skip(reason="No way to test this feature yet")
+    # Assert
+    assert response.status_code == 404
+    assert "message" in response_body
+
+    # Check that no changes were committed. 
+    assert len(Goal.query.get(1).tasks) == 0
+    
+    
+
+# @pytest.mark.skip(reason="No way to test this feature yet")
 def test_post_task_ids_to_goal_already_with_goals(client, one_task_belongs_to_one_goal, three_tasks):
     # Act
     response = client.post("/goals/1/tasks", json={

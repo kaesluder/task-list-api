@@ -148,9 +148,24 @@ def link_tasks_to_goal(id):
             session.query(Task).filter(Task.id.in_(task_ids))
             #Task.query.filter(Task.id == 1).all()
         )
+
+    found_ids = []
     for task in tasks:
         task.goal = goal
+        found_ids.append(task.id)
         session.flush()
-    session.commit()
+
+    # end error if found_ids != task_ids
+    # the inverse found_ids - task_ids shouldn't happen 
+    # with this sql. 
+    error_ids = list(set(task_ids) - set(found_ids))
+    if error_ids:
+        abort(
+            make_response(jsonify({"message": f"Tasks: {error_ids} not found. No changes."}), 404)
+        )
+    else:
+        session.commit()
 
     return jsonify({"id": int(id), "task_ids": task_ids})
+
+

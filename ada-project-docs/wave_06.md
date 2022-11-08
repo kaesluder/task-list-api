@@ -45,7 +45,7 @@ After learning the strategy for creating a one-to-many relationship, in the Task
 
 Remember to run `flask db migrate` and `flask db upgrade` whenever there is a change to the model.
 
-### TODO Sending a List of Task IDs to a Goal
+### DONE Sending a List of Task IDs to a Goal
 
 Given:
 

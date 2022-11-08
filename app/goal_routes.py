@@ -145,8 +145,10 @@ def link_tasks_to_goal(id):
 
     session = db.session
     tasks = (
+            # REVIEW: There might be a better way to do this, but the 
+            # alternate methods I found got really hairy. 
             session.query(Task).filter(Task.id.in_(task_ids))
-            #Task.query.filter(Task.id == 1).all()
+            
         )
 
     found_ids = []
@@ -167,5 +169,24 @@ def link_tasks_to_goal(id):
         session.commit()
 
     return jsonify({"id": int(id), "task_ids": task_ids})
+
+@bp.route("/<id>/tasks", methods=["GET"])
+def get_tasks_by_goal(id):
+
+    goal = route_helpers.validate_record_by_id(Goal, id)
+
+    goal_dict = goal.to_dict()
+    tasks = goal.tasks
+
+    goal_dict["tasks"] = [t.to_dict() for t in tasks]
+
+    return jsonify(goal_dict)
+
+
+
+
+
+
+
 
 

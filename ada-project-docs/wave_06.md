@@ -106,7 +106,7 @@ then I get this response:
 }
 ```
 
-### TODO Getting Tasks of One Goal: No Matching Tasks
+### DONE Getting Tasks of One Goal: No Matching Tasks
 
 Given a goal that has:
 
@@ -129,7 +129,7 @@ then I get this response:
 }
 ```
 
-### TODO Getting Tasks of One Goal: No Matching Goal
+### DONE Getting Tasks of One Goal: No Matching Goal
 
 Given that no goals exist,
 

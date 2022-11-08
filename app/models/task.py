@@ -20,6 +20,12 @@ class Task(db.Model):
             id=self.id,
             description=self.description,
         )
+
+        if self.goal_id:
+            result_dict["goal_id"] = self.goal_id
+
+
+
         return result_dict
 
     @classmethod

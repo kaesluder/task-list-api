@@ -139,7 +139,26 @@ def link_tasks_to_goal(id):
 
     goal = route_helpers.validate_record_by_id(Goal, id)
 
-    task_ids = request.get_json().get("task_ids")
+    task_ids = None
+
+    # error check this:
+    try:
+        task_ids = request.get_json()["task_ids"]
+
+    # REVIEW: add test cases for these errors
+    except Exception as e:
+        abort(
+            make_response(
+                jsonify({"message": f"Something went wrong parsing your JSON {repr(e)}."}), 
+                400)
+        )
+
+    if not task_ids:
+        abort(
+            make_response(
+                jsonify({"message": f"Something went wrong parsing your JSON. No task ids sent."}), 
+                400)
+        )
 
     # query help from https://docs.sqlalchemy.org/en/14/_modules/examples/performance/bulk_updates.html
 
@@ -163,7 +182,8 @@ def link_tasks_to_goal(id):
     error_ids = list(set(task_ids) - set(found_ids))
     if error_ids:
         abort(
-            make_response(jsonify({"message": f"Tasks: {error_ids} not found. No changes."}), 404)
+            make_response(jsonify({"message": f"Tasks: {error_ids} not found. No changes."}), 
+            404)
         )
     else:
         session.commit()
@@ -172,6 +192,12 @@ def link_tasks_to_goal(id):
 
 @bp.route("/<id>/tasks", methods=["GET"])
 def get_tasks_by_goal(id):
+    """
+    Get all the tasks associated with a specified goal.
+    
+    Returns JSON on success, including empty task list.
+    Returns 400 or 404 and JSON if error.
+    """
 
     goal = route_helpers.validate_record_by_id(Goal, id)
 

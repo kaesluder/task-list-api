@@ -69,7 +69,7 @@ Then the three `Task`s belong to the `Goal` and it gets updated in the database,
 }
 ```
 
-### TODO Getting Tasks of One Goal
+### DONE Getting Tasks of One Goal
 
 Given a goal that has:
 

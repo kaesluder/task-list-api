@@ -141,24 +141,9 @@ def link_tasks_to_goal(id):
 
     task_ids = None
 
-    # error check this:
-    try:
-        task_ids = request.get_json()["task_ids"]
+    request_data = route_helpers.validate_json_data(request, ["task_ids"])
 
-    # REVIEW: add test cases for these errors
-    except Exception as e:
-        abort(
-            make_response(
-                jsonify({"message": f"Something went wrong parsing your JSON {repr(e)}."}), 
-                400)
-        )
-
-    if not task_ids:
-        abort(
-            make_response(
-                jsonify({"message": f"Something went wrong parsing your JSON. No task ids sent."}), 
-                400)
-        )
+    task_ids = request_data["task_ids"]
 
     # query help from https://docs.sqlalchemy.org/en/14/_modules/examples/performance/bulk_updates.html
 

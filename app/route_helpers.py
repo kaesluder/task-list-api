@@ -1,6 +1,7 @@
 from app import db
 from app.models.task import Task
-from flask import Blueprint, jsonify, abort, make_response, request
+from flask import Blueprint, jsonify, abort, make_response
+from requests import HTTPError
 
 
 def validate_record_by_id(cls, id):
@@ -27,3 +28,34 @@ def validate_record_by_id(cls, id):
         )
 
     return record
+
+def validate_json_data(request, required_fields):
+    """
+    Validates json from a request object checking for 
+    required_fields. 
+
+    Delivers 400 code and error to users on failure.
+    Returns data dict to calling function on success.
+    """
+
+    try:
+        request_data = request.get_json()
+        missing_fields = []
+        for f in required_fields:
+            if not request_data.get(f):
+                missing_fields.append(f)
+        
+        if missing_fields:
+            raise HTTPError(f"Missing required fields: {missing_fields}.")
+
+        return request_data
+
+    # REVIEW: add test cases for these errors
+    except Exception as e:
+        abort(
+            make_response(
+                jsonify({"message": f"Something went wrong parsing your JSON: {e}"}), 
+                400)
+        )
+
+

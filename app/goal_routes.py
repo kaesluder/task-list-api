@@ -1,5 +1,6 @@
 from flask import Blueprint
 from app.models.goal import Goal
+from app.models.task import Task
 from app import db
 from app import route_helpers
 from flask import Blueprint, jsonify, abort, make_response, request
@@ -127,3 +128,28 @@ def delete_goal(id):
         jsonify({"details": f'Goal {goal.id} "{goal.title}" successfully deleted'})
     )
 
+@bp.route("/<id>/tasks", methods=["POST"])
+def link_tasks_to_goal(id):
+    """
+    Link the task ids passedby task_li to 
+    goal at id.
+    
+    Returns 200 and id, task_li as json.
+    """
+
+    goal = route_helpers.validate_record_by_id(Goal, id)
+
+    task_ids = request.get_json().get("task_ids")
+
+    # query help from https://docs.sqlalchemy.org/en/14/_modules/examples/performance/bulk_updates.html
+
+    session = db.session
+    tasks = (
+            session.query(Task)
+            .filter(Task.id._in(task_ids))
+            .all()
+        )
+    for task in tasks:
+        task.goal = goal
+        session.flush()
+    session.commit()

@@ -8,7 +8,7 @@ class Task(db.Model):
     completed_at = db.Column(db.DateTime)
 
     # many to one
-    goal_id = db.Column(db.Integer, db.ForeignKey('task.id'))
+    goal_id = db.Column(db.Integer, db.ForeignKey('goal.id'))
     goal = db.relationship("Goal", back_populates="task")
 
 

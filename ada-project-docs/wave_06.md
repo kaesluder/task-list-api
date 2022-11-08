@@ -22,7 +22,7 @@ Secondly, we should create our new route, `/goals/<goal_id>/tasks`, so that our 
 - Use the tests in `tests/test_wave_06.py` to guide your implementation.
 - Some tests use a fixture named `one_task_belongs_to_one_goal` that is defined in `tests/conftest.py`. This fixture saves a task and a goal to the test database, and uses SQLAlchemy to associate the goal and task together.
 
-### TODO Updates to the Goal Model
+### DONE Updates to the Goal Model
 
 Use independent research to discover how to set up a one-to-many relationship in Flask.
 
@@ -32,7 +32,7 @@ After learning the strategy for creating a one-to-many relationship, in the Goal
 
 - Setting the `lazy` value to `True`
 
-### TODO Updates to the Task Model
+### DONE Updates to the Task Model
 
 Use independent research to discover how to set up a one-to-many relationship in Flask.
 

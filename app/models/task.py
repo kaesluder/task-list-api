@@ -8,9 +8,8 @@ class Task(db.Model):
     completed_at = db.Column(db.DateTime)
 
     # many to one
-    goal_id = db.Column(db.Integer, db.ForeignKey('goal.id'))
+    goal_id = db.Column(db.Integer, db.ForeignKey("goal.id"))
     goal = db.relationship("Goal", back_populates="tasks")
-
 
     def to_dict(self):
         result_dict = dict(
@@ -23,8 +22,6 @@ class Task(db.Model):
 
         if self.goal_id:
             result_dict["goal_id"] = self.goal_id
-
-
 
         return result_dict
 

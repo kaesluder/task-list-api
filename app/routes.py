@@ -178,8 +178,8 @@ def mark_task_complete_incomplete(id, mark):
 
         slack_status, slack_result = slackbot_post(f"{task.title} marked complete.")
 
-        # dump slack debug info to stdout for now. 
-        # not sure how to test this branch further. 
+        # dump slack debug info to stdout for now.
+        # not sure how to test this branch further.
         if not slack_status:
             print("Slack post failed:")
             print(slack_result)
@@ -189,4 +189,3 @@ def mark_task_complete_incomplete(id, mark):
 
     db.session.commit()
     return make_response(jsonify({"task": task.to_dict()}), 200)
-

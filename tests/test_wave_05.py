@@ -157,6 +157,16 @@ def test_create_goal_missing_title(client):
 
     # Assert
     assert response.status_code == 400
-    assert response_body == {
-        "details": "Invalid data"
-    }
+    assert "message" in response_body
+    assert "Something went wrong" in response_body["message"]
+
+def test_create_goal_bad_json(client):
+    # Act
+    response = client.post("/goals", json="asdf")
+    response_body = response.get_json()
+
+    # Assert
+    assert response.status_code == 400
+    assert "message" in response_body
+    assert "Something went wrong" in response_body["message"]
+

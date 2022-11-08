@@ -9,7 +9,6 @@ class Goal(db.Model):
 
     tasks = db.relationship("Task", back_populates="goal")
 
-
     def to_dict(self):
         result_dict = dict(
             # evaluates as False if null, True otherwise
@@ -20,6 +19,4 @@ class Goal(db.Model):
 
     @classmethod
     def from_dict(cls, goal_dict):
-        return cls(
-            title=goal_dict["title"]
-            )
+        return cls(title=goal_dict["title"])

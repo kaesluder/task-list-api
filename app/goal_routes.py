@@ -52,16 +52,14 @@ def handle_goal_post():
     Returns 400 status and json summary on error.
     """
 
-    request_body = request.get_json()
+    request_body = route_helpers.validate_json_data(request, ["title"])
 
-    # error checking
+    # # error checking
 
-    if "title" not in request_body:
-        abort(make_response(jsonify({"details": "Invalid data"}), 400))
+    # if "title" not in request_body:
+    #     abort(make_response(jsonify({"details": "Invalid data"}), 400))
 
-    new_goal = Goal(
-        title=request_body["title"]
-    )
+    new_goal = Goal(title=request_body["title"])
 
     print(new_goal.to_dict)
 
@@ -109,7 +107,6 @@ def update_goal(id):
     return make_response(jsonify({"goal": goal.to_dict()}))
 
 
-
 @bp.route("/<id>", methods=["DELETE"])
 def delete_goal(id):
     """
@@ -128,12 +125,13 @@ def delete_goal(id):
         jsonify({"details": f'Goal {goal.id} "{goal.title}" successfully deleted'})
     )
 
+
 @bp.route("/<id>/tasks", methods=["POST"])
 def link_tasks_to_goal(id):
     """
-    Link the task ids passedby task_li to 
+    Link the task ids passedby task_li to
     goal at id.
-    
+
     Returns 200 and id, task_li as json.
     """
 
@@ -149,11 +147,10 @@ def link_tasks_to_goal(id):
 
     session = db.session
     tasks = (
-            # REVIEW: There might be a better way to do this, but the 
-            # alternate methods I found got really hairy. 
-            session.query(Task).filter(Task.id.in_(task_ids))
-            
-        )
+        # REVIEW: There might be a better way to do this, but the
+        # alternate methods I found got really hairy.
+        session.query(Task).filter(Task.id.in_(task_ids))
+    )
 
     found_ids = []
     for task in tasks:
@@ -162,24 +159,26 @@ def link_tasks_to_goal(id):
         session.flush()
 
     # end error if found_ids != task_ids
-    # the inverse found_ids - task_ids shouldn't happen 
-    # with this sql. 
+    # the inverse found_ids - task_ids shouldn't happen
+    # with this sql.
     error_ids = list(set(task_ids) - set(found_ids))
     if error_ids:
         abort(
-            make_response(jsonify({"message": f"Tasks: {error_ids} not found. No changes."}), 
-            404)
+            make_response(
+                jsonify({"message": f"Tasks: {error_ids} not found. No changes."}), 404
+            )
         )
     else:
         session.commit()
 
     return jsonify({"id": int(id), "task_ids": task_ids})
 
+
 @bp.route("/<id>/tasks", methods=["GET"])
 def get_tasks_by_goal(id):
     """
     Get all the tasks associated with a specified goal.
-    
+
     Returns JSON on success, including empty task list.
     Returns 400 or 404 and JSON if error.
     """
@@ -192,12 +191,3 @@ def get_tasks_by_goal(id):
     goal_dict["tasks"] = [t.to_dict() for t in tasks]
 
     return jsonify(goal_dict)
-
-
-
-
-
-
-
-
-

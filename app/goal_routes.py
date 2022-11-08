@@ -145,11 +145,12 @@ def link_tasks_to_goal(id):
 
     session = db.session
     tasks = (
-            session.query(Task)
-            .filter(Task.id._in(task_ids))
-            .all()
+            session.query(Task).filter(Task.id.in_(task_ids))
+            #Task.query.filter(Task.id == 1).all()
         )
     for task in tasks:
         task.goal = goal
         session.flush()
     session.commit()
+
+    return jsonify({"id": int(id), "task_ids": task_ids})

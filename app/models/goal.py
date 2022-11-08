@@ -7,7 +7,7 @@ class Goal(db.Model):
 
     # one to many
 
-    tasks = db.relationship("Task", back_populates="goal")
+    task = db.relationship("Task", back_populates="goal")
 
 
     def to_dict(self):

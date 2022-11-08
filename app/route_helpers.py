@@ -51,7 +51,7 @@ def validate_json_data(request, required_fields):
 
         return request_data
 
-    # DONE add test cases for these errors
+    # This block catches the HTTPError, as well as json = "foo" or json = [] 
     except Exception as e:
         abort(
             make_response(

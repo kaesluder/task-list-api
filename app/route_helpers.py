@@ -54,7 +54,7 @@ def validate_json_data(request, required_fields):
     except Exception as e:
         abort(
             make_response(
-                jsonify({"message": f"Something went wrong parsing your JSON: {e}"}), 
+                jsonify({"message": f"Something went wrong parsing your request: {e}"}), 
                 400)
         )
 

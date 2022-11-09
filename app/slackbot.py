@@ -16,12 +16,12 @@ def slackbot_post(text):
 
     # REVIEW: setup error checking for environ import.
     auth_token = "Bearer " + os.environ["SLACKBOT_TOKEN"]
-    channel = os.environ["SLACKBOT_CHANNEL"]
-    endpoint = os.environ["SLACKBOT_ENDPOINT"]
+    channel = os.environ.get("SLACKBOT_CHANNEL")
+    endpoint = os.environ.get("SLACKBOT_ENDPOINT")
 
     # hack to avoid spamming slack during development.
     # PONY figure out way to set up dummy request/response objects.
-    testing = os.environ["SLACKBOT_DISABLED"]
+    testing = os.environ.get("SLACKBOT_DISABLED")
     if testing == "YES":
         return (True, {"message": "Slackbot disabled for testing."})
 

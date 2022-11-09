@@ -6,7 +6,7 @@ Our goal is to make our project accessible online!
 
 ## Requirements
 
-TODO: Deploy this project to Heroku.
+DONE: Deploy this project to Heroku.
 
 Then, add some Task records and Goal records to the production database.
 

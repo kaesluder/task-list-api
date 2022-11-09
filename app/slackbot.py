@@ -15,7 +15,7 @@ def slackbot_post(text):
     # REVIEW: Make asynch?
 
     # DONE: setup error checking for environ import.
-    auth_token = "Bearer " + os.environ.get("SLACKBOT_TOKEN")
+    auth_token = "Bearer " + str(os.environ.get("SLACKBOT_TOKEN"))
     channel = os.environ.get("SLACKBOT_CHANNEL")
     endpoint = os.environ.get("SLACKBOT_ENDPOINT")
 

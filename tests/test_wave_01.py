@@ -170,10 +170,10 @@ def test_create_task_must_contain_title(client):
 
     # Assert
     assert response.status_code == 400
-    assert "details" in response_body
-    assert response_body == {
-        "details": "Invalid data"
-    }
+    assert "message" in response_body
+    assert "Something went wrong" in response_body["message"]
+    assert "title" in response_body["message"]
+
     assert Task.query.all() == []
 
 
@@ -187,8 +187,8 @@ def test_create_task_must_contain_description(client):
 
     # Assert
     assert response.status_code == 400
-    assert "details" in response_body
-    assert response_body == {
-        "details": "Invalid data"
-    }
+    assert "message" in response_body
+    assert "Something went wrong" in response_body["message"]
+    assert "description" in response_body["message"]
+
     assert Task.query.all() == []

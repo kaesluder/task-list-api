@@ -98,7 +98,7 @@ def update_goal(id):
 
     goal = route_helpers.validate_record_by_id(Goal, id)
 
-    request_body = request.get_json()
+    request_body = route_helpers.validate_json_data(request, ["title"])
 
     goal.title = request_body["title"]
 

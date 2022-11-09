@@ -52,16 +52,8 @@ def handle_task_post():
     Returns 400 status and json summary on error.
     """
 
-    request_body = request.get_json()
+    request_body = route_helpers.validate_json_data(request, ["title", "description"])
 
-    # error checking
-    # DONE Create a Task: Invalid Task With Missing Data
-
-    if "title" not in request_body:
-        abort(make_response(jsonify({"details": "Invalid data"}), 400))
-
-    if "description" not in request_body:
-        abort(make_response(jsonify({"details": "Invalid data"}), 400))
 
     new_task = Task(
         title=request_body["title"], description=request_body["description"]
@@ -110,7 +102,7 @@ def update_task(id):
 
     task = route_helpers.validate_record_by_id(Task, id)
 
-    request_body = request.get_json()
+    request_body = route_helpers.validate_json_data(request, ["title", "description"])
 
     task.title = request_body["title"]
     task.description = request_body["description"]

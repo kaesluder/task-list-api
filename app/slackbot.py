@@ -14,16 +14,19 @@ def slackbot_post(text):
 
     # REVIEW: Make asynch?
 
-    # REVIEW: setup error checking for environ import.
-    auth_token = "Bearer " + os.environ["SLACKBOT_TOKEN"]
+    # DONE: setup error checking for environ import.
+    auth_token = "Bearer " + os.environ.get("SLACKBOT_TOKEN")
     channel = os.environ.get("SLACKBOT_CHANNEL")
     endpoint = os.environ.get("SLACKBOT_ENDPOINT")
+
+    if not (auth_token and channel and endpoint):
+        return (False, {"ok": False, "message": "Slackbot disabled for testing."})
 
     # hack to avoid spamming slack during development.
     # PONY figure out way to set up dummy request/response objects.
     testing = os.environ.get("SLACKBOT_DISABLED")
     if testing == "YES":
-        return (True, {"message": "Slackbot disabled for testing."})
+        return (False, {"ok": False, "message": "Slackbot disabled for testing."})
 
     request_body = {"channel": channel, "text": text}
 

@@ -54,7 +54,6 @@ def handle_task_post():
 
     request_body = route_helpers.validate_json_data(request, ["title", "description"])
 
-
     new_task = Task(
         title=request_body["title"], description=request_body["description"]
     )

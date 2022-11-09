@@ -1,7 +1,7 @@
 import pytest
 from app.slackbot import slackbot_post
 
-# @pytest.mark.skip(reason="Avoid spamming slack in development.")
+@pytest.mark.skip(reason="Avoid spamming slack in development.")
 def test_slackbot_post_success():
     """
     slackbot_post should return a tuple with 

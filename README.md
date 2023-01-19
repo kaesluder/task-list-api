@@ -55,3 +55,7 @@ This project is designed to fulfill the features described in detail in each wav
 1. [Wave 6: Establishing a one-to-many relationship between two models](ada-project-docs/wave_06.md)
 1. [Wave 7: Deployment](ada-project-docs/wave_07.md)
 1. [Optional Enhancements](ada-project-docs/optional-enhancements.md)
+
+```
+pyinstaller -F task_list_api.py
+```

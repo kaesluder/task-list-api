@@ -12,7 +12,7 @@ load_dotenv()
 
 
 def create_app(test_config=None):
-    app = Flask(__name__, static_folder="../static", static_url_path="")
+    app = Flask(__name__, static_folder="static", static_url_path="")
     CORS(app)
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -42,12 +42,8 @@ def create_app(test_config=None):
 
     app.register_blueprint(goal_routes.bp)
 
-    @app.route("/<path:filename>")
-    def hello_world(filename):
-        return send_from_directory("../static", filename)
-
     @app.route("/")
     def root_index():
-        return send_from_directory("../static", "index.html")
+        return send_from_directory("static", "index.html")
 
     return app
